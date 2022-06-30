@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/RG.gd" type="Script" id=2]
 
 [sub_resource type="ProceduralSky" id=2]
 sky_top_color = Color( 0.823529, 0.87451, 0.854902, 1 )
@@ -28,13 +27,6 @@ current = true
 fov = 43.7
 far = 201.5
 
-[node name="Floor" type="CSGBox" parent="."]
-transform = Transform( 1.46723, 0, 0, 0, 1, 0, 0, 0, 0.522153, -0.378183, 4, -72.084 )
-use_collision = true
-width = 22.0
-height = 0.5
-depth = 288.0
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.99572, 0 )
 input_ray_pickable = false
@@ -52,21 +44,132 @@ remote_path = NodePath("../../Camera")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 3 )
 
-[node name="Caixa" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 13, -12 )
+[node name="Terrain" type="Spatial" parent="."]
+transform = Transform( 1.32051, 0, 0, 0, 1, 0, 0, 0, 0.551394, -0.378183, 4, -72.084 )
+
+[node name="Floor" type="CSGBox" parent="Terrain"]
+use_collision = true
+width = 38.0
+height = 0.5
+depth = 278.0
+
+[node name="Esquerdo" type="Spatial" parent="Terrain"]
+transform = Transform( 0.757285, 0, 0, 0, 1, 0, 0, 0, 1.81359, 0.286392, -4, 130.731 )
+
+[node name="Trem" type="RigidBody" parent="Terrain/Esquerdo"]
+transform = Transform( 3.504, 0, 0, 0, 3.8, 0, 0, 0, -14.346, -20, 9, -52 )
 contacts_reported = 5
 contact_monitor = true
 can_sleep = false
-script = ExtResource( 2 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Caixa"]
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/Esquerdo/Trem"]
 mesh = SubResource( 4 )
 material/0 = null
 
-[node name="CollisionShape" type="CollisionShape" parent="Caixa"]
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Esquerdo/Trem"]
 shape = SubResource( 5 )
 
-[connection signal="body_entered" from="Caixa" to="Player" method="_on_Caixa_body_entered"]
-[connection signal="body_entered" from="Caixa" to="Caixa" method="_on_Caixa_body_entered"]
+[node name="Trem_" type="RigidBody" parent="Terrain/Esquerdo"]
+transform = Transform( 3.504, 0, 0, 0, 3.8, 0, 0, 0, -14.346, -20, 9, -17 )
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/Esquerdo/Trem_"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Esquerdo/Trem_"]
+shape = SubResource( 5 )
+
+[node name="Trem__" type="RigidBody" parent="Terrain/Esquerdo"]
+transform = Transform( 3.504, 0, 0, 0, 3.8, 0, 0, 0, -14.346, -20, 9, -88 )
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/Esquerdo/Trem__"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Esquerdo/Trem__"]
+shape = SubResource( 5 )
+
+[node name="Trem___" type="RigidBody" parent="Terrain/Esquerdo"]
+transform = Transform( 3.504, 0, 0, 0, 3.8, 0, 0, 0, -14.346, -20, 9, -124 )
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/Esquerdo/Trem___"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Esquerdo/Trem___"]
+shape = SubResource( 5 )
+
+[node name="Direito" type="Spatial" parent="Terrain"]
+transform = Transform( 0.757285, 0, 0, 0, 1, 0, 0, 0, 1.81359, 29.8205, -4, 130.731 )
+
+[node name="Trem" type="RigidBody" parent="Terrain/Direito"]
+transform = Transform( 3.504, 0, 0, 0, 3.8, 0, 0, 0, -14.346, -20, 9, -52 )
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/Direito/Trem"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Direito/Trem"]
+shape = SubResource( 5 )
+
+[node name="Trem_" type="RigidBody" parent="Terrain/Direito"]
+transform = Transform( 3.504, 0, 0, 0, 3.8, 0, 0, 0, -14.346, -20, 9, -17 )
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/Direito/Trem_"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Direito/Trem_"]
+shape = SubResource( 5 )
+
+[node name="Trem__" type="RigidBody" parent="Terrain/Direito"]
+transform = Transform( 3.504, 0, 0, 0, 3.8, 0, 0, 0, -14.346, -20, 9, -88 )
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/Direito/Trem__"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Direito/Trem__"]
+shape = SubResource( 5 )
+
+[node name="Trem___" type="RigidBody" parent="Terrain/Direito"]
+transform = Transform( 3.504, 0, 0, 0, 3.8, 0, 0, 0, -14.346, -20, 9, -124 )
+contacts_reported = 5
+contact_monitor = true
+can_sleep = false
+
+[node name="MeshInstance" type="MeshInstance" parent="Terrain/Direito/Trem___"]
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Terrain/Direito/Trem___"]
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="Terrain/Direito/Trem" to="Player" method="_on_Caixa_body_entered"]
+[connection signal="body_entered" from="Terrain/Direito/Trem" to="Terrain/Direito/Trem" method="_on_Caixa_body_entered"]
+[connection signal="body_entered" from="Terrain/Direito/Trem_" to="Player" method="_on_Caixa_body_entered"]
+[connection signal="body_entered" from="Terrain/Direito/Trem_" to="Terrain/Direito/Trem_" method="_on_Caixa_body_entered"]
+[connection signal="body_entered" from="Terrain/Direito/Trem__" to="Player" method="_on_Caixa_body_entered"]
+[connection signal="body_entered" from="Terrain/Direito/Trem__" to="Terrain/Direito/Trem__" method="_on_Caixa_body_entered"]
+[connection signal="body_entered" from="Terrain/Direito/Trem___" to="Player" method="_on_Caixa_body_entered"]
+[connection signal="body_entered" from="Terrain/Direito/Trem___" to="Terrain/Direito/Trem___" method="_on_Caixa_body_entered"]
 
 [editable path="Player"]
