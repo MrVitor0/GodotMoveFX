@@ -7,14 +7,14 @@ export var jump_impulse = 25
 var velocity = Vector3.ZERO
 
 onready var pivot = $Pivot
-
-#definir uma variável chamada "AnimationPlayer" que recebe o AnimationPlayer do objeto CharacterMesh que fica dentro do objeto Pivot
 onready var AnimationPlayer = $Pivot/CharacterMesh/AnimationPlayer
 
 
+func _ready():
+	add_to_group("player")
+
 func is_jumping():  
 	return velocity.y == 0
-
 
 func _physics_process(delta):
 	var input_vector = get_input_vector()
@@ -22,7 +22,6 @@ func _physics_process(delta):
 	apply_gravity(delta)
 	jump()
 	velocity = move_and_slide(velocity, Vector3.UP)
-	
 	
 func get_input_vector():
 	var input_vector = Vector3.ZERO
@@ -36,10 +35,7 @@ func get_input_vector():
 	elif input_vector.length_squared() <= 0.0 && is_jumping():
 	   AnimationPlayer.play("idle")
 
-
 	return input_vector.normalized()
-	
-
 
 
 func apply_movement(input_vector):
@@ -58,3 +54,5 @@ func jump():
 	if is_on_floor() and Input.is_action_pressed("jump"):
 		AnimationPlayer.play("jump")
 		velocity.y = jump_impulse
+		
+
