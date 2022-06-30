@@ -1,12 +1,10 @@
-# GDSimpleSkybox
-Simple skybox for Godot is a tool script and have six sides where you can apply texture.
+# Godot 3D Player Movement
+Repositório de Movimentação 3D + Animações com GODOT
 
-![Alt text](https://github.com/Chaosus/GDSimpleSkybox/blob/master/screenshot.png)
+# O que contém?
+- Animações Básicas (Correr, Andar, Pular)
+- Sistema de Movimentação 3D
+- Sistema de Camera (3º Pessoa)
+- Sistema de Luz (Direta, Ponto, Spot, Area)
+- Sistema de Textura (Cubo, Plano, Textura)
 
-Note: No sky textures is included - you can find them in internet
-
-# What ? PanoramaSky is not enought ?
-PanoramaSky is for hdr(cubemaps). This script allows you to construct skybox directly from six textures. I found that internet contains a lot of these single images, so this script could simplify the life for developers a bit.
-
-# How to use
-Insert the Skybox.tscn to your scene and setup six textures to it, after this restart scene and the resulted skybox will shows, scale it how you like, and enjoy !
