@@ -12,6 +12,9 @@ onready var pivot = $Pivot
 onready var AnimationPlayer = $Pivot/CharacterMesh/AnimationPlayer
 
 
+func is_jumping():  
+	return velocity.y == 0
+
 
 func _physics_process(delta):
 	var input_vector = get_input_vector()
@@ -29,6 +32,9 @@ func get_input_vector():
 	#verifica se o persoangem está em movimento
 	if input_vector.length_squared() > 0.0 && is_on_floor():
 	   AnimationPlayer.play("run")
+	#verifica se o jogador está parado e não está pulando
+	elif input_vector.length_squared() <= 0.0 && is_jumping():
+	   AnimationPlayer.play("idle")
 
 
 	return input_vector.normalized()
